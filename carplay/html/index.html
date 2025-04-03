@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarPlay - Abel Developer Team</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="carplay-container">
+        <div id="carplay-header">
+            <div class="logo">
+                <i class="fas fa-car-alt"></i> 
+                <span>CarPlay</span> 
+                <span class="brand-tag">
+                    <img src="img/abel-logo.png" alt="Abel Developer Team Logo" class="header-logo">
+                </span>
+            </div>
+            <div class="time">00:00</div>
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+        </div>
+        
+        <div id="carplay-content">
+            <!-- Főmenü képernyő -->
+            <div id="main-menu" class="screen active-screen">
+                <div class="brand-banner">
+                    <div class="brand-logo">
+                        <img src="img/abel-logo.png" alt="Abel Developer Team Logo" class="abel-logo">
+                    </div>
+                </div>
+                <div class="app-grid">
+                    <div class="app-icon" data-app="radio">
+                        <i class="fas fa-radio"></i>
+                        <span>Rádió</span>
+                    </div>
+                    <div class="app-icon" data-app="youtube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </div>
+                    <!-- Vissza gomb a főmenüben -->
+                    <div class="app-icon back-to-main" id="main-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Vissza</span>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <img src="img/abel-logo.png" alt="Abel Developer Team Logo" class="footer-logo">
+                </div>
+            </div>
+            
+            <!-- Rádió képernyő -->
+            <div id="radio-screen" class="screen hidden-screen">
+                <div class="media-player">
+                    <div class="station-info">
+                        <img src="img/radio-logo.png" alt="Rádió logó" class="station-logo">
+                        <h2 class="station-name">Petőfi Rádió</h2>
+                        <p class="station-frequency">94.8 MHz</p>
+                    </div>
+                    
+                    <div class="player-controls compact-controls">
+                        <div class="control-wrapper">
+                            <button class="control-btn" data-action="play"><i class="fas fa-play"></i></button>
+                            <span class="control-label">Lejátszás</span>
+                        </div>
+                        <div class="control-wrapper">
+                            <button class="control-btn" data-action="pause"><i class="fas fa-pause"></i></button>
+                            <span class="control-label">Szünet</span>
+                        </div>
+                        <div class="control-wrapper">
+                            <button class="control-btn" data-action="stop"><i class="fas fa-stop"></i></button>
+                            <span class="control-label">Leállítás</span>
+                        </div>
+                    </div>
+                    
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" min="0" max="100" value="50" class="volume-slider">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    
+                    <audio id="radio-player" class="hidden"></audio>
+                    
+                    <button class="back-btn"><i class="fas fa-arrow-left"></i> Vissza</button>
+                </div>
+            </div>
+            
+            <!-- YouTube képernyő - Tömörebb elrendezés -->
+            <div id="youtube-screen" class="screen hidden-screen">
+                <div class="media-player compact-player">
+                    <!-- Jól látható vissza gomb felül -->
+                    <button class="back-btn top-back-btn"><i class="fas fa-arrow-left"></i> Vissza a Főmenübe</button>
+                    
+                    <div class="station-info youtube-header">
+                        <i class="fab fa-youtube youtube-logo"></i>
+                        <h2 class="station-name">YouTube Lejátszó</h2>
+                    </div>
+                    
+                    <!-- Tömörebb YouTube link beviteli mező -->
+                    <div class="youtube-input">
+                        <input type="text" id="youtube-link" placeholder="YouTube link beillesztése...">
+                        <button id="youtube-submit"><i class="fas fa-play"></i></button>
+                    </div>
+                    
+                    <div id="youtube-container">
+                        <div id="youtube-player"></div>
+                    </div>
+                    
+                    <!-- Feltűnőbb vezérlőgombok címkékkel - közvetlenül a videó alatt -->
+                    <div class="player-controls compact-controls">
+                        <div class="control-wrapper">
+                            <button class="control-btn" data-action="play"><i class="fas fa-play"></i></button>
+                            <span class="control-label">Lejátszás</span>
+                        </div>
+                        <div class="control-wrapper">
+                            <button class="control-btn" data-action="pause"><i class="fas fa-pause"></i></button>
+                            <span class="control-label">Szünet</span>
+                        </div>
+                        <div class="control-wrapper">
+                            <button class="control-btn" data-action="stop"><i class="fas fa-stop"></i></button>
+                            <span class="control-label">Leállítás</span>
+                        </div>
+                    </div>
+                    
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" min="0" max="100" value="50" class="volume-slider">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

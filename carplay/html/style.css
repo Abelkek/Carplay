@@ -1,0 +1,605 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#carplay-container {
+    width: 700px;
+    height: 500px;
+    background-color: rgba(18, 18, 18, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 120, 255, 0.3);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    border: 1px solid rgba(0, 120, 255, 0.4);
+    margin: 0;
+    z-index: 9999;
+}
+
+#carplay-container.active {
+    display: flex;
+}
+
+#carplay-header {
+    height: 50px;
+    background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(0, 120, 255, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo i {
+    color: #0078ff;
+    font-size: 20px;
+}
+
+.brand-tag {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 10px;
+    letter-spacing: 0.5px;
+    color: #0078ff;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    height: 30px;
+    width: auto;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.brand-banner {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.1) 0%, rgba(0, 60, 120, 0.1) 100%);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 120, 255, 0.2);
+}
+
+.brand-logo {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.abel-logo {
+    width: 160px;
+    height: auto;
+    filter: drop-shadow(0 2px 10px rgba(0, 120, 255, 0.5));
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.brand-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.footer-info {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 10px 0;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.footer-logo {
+    width: 80px;
+    height: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    margin-bottom: 5px;
+}
+
+.close-btn {
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.close-btn:hover {
+    color: #ff3b30;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+#carplay-content {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 52, 96, 0.95) 100%);
+    padding: 15px;
+    overflow: hidden;
+}
+
+.active-screen {
+    display: block;
+}
+
+.hidden-screen {
+    display: none;
+}
+
+/* Main Menu */
+.app-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px 20px 65px 20px;
+    gap: 40px;
+    position: relative;
+    z-index: 20;
+}
+
+.app-icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 120, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.app-icon:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.15) 0%, rgba(0, 60, 120, 0.1) 100%);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 120, 255, 0.3);
+    border-color: rgba(0, 120, 255, 0.4);
+}
+
+.app-icon:hover i {
+    color: #0078ff;
+    transform: scale(1.1);
+}
+
+.app-icon i {
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.app-icon span {
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Media Player Screens */
+.media-player {
+    padding: 40px;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Kompakt média lejátszó a YouTube-hoz */
+.compact-player {
+    padding: 12px;
+    justify-content: flex-start;
+    overflow-y: auto;
+    max-height: 450px;
+}
+
+.station-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.station-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.2) 0%, rgba(0, 60, 120, 0.15) 100%);
+    border: 1px solid rgba(0, 120, 255, 0.3);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.3) 0%, rgba(0, 60, 120, 0.25) 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 120, 255, 0.3);
+    color: #ffffff;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.volume-control i {
+    color: #fff;
+    font-size: 16px;
+}
+
+input[type="range"] {
+    width: 220px;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+/* YouTube Screen */
+#youtube-container {
+    width: 100%;
+    height: 200px;
+    margin: 10px 0;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#youtube-player {
+    width: 100%;
+    height: 100%;
+}
+
+.youtube-input {
+    display: flex;
+    margin: 5px 0;
+    width: 100%;
+}
+
+#youtube-link {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    outline: none;
+    font-size: 13px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+#youtube-link:focus {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+#youtube-submit {
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.back-btn {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, rgba(0, 120, 255, 0.2) 0%, rgba(0, 60, 120, 0.15) 100%);
+    border: 1px solid rgba(0, 120, 255, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    background: linear-gradient(90deg, rgba(0, 120, 255, 0.3) 0%, rgba(0, 60, 120, 0.25) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 120, 255, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Vissza gomb a főmenüben */
+.back-to-main i {
+    color: #ff5e57;
+}
+
+.back-to-main:hover i {
+    color: #ff3b30;
+}
+
+.back-to-main:hover {
+    background: linear-gradient(135deg, rgba(255, 59, 48, 0.15) 0%, rgba(200, 30, 30, 0.1) 100%);
+    border-color: rgba(255, 59, 48, 0.4);
+}
+
+/* Felső vissza gomb a YouTube képernyőn */
+.top-back-btn {
+    position: static;
+    margin-bottom: 5px;
+    background-color: rgba(255, 59, 48, 0.3);
+    border-color: rgba(255, 59, 48, 0.5);
+    align-self: flex-start;
+    font-size: 11px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.top-back-btn:hover {
+    background-color: rgba(255, 59, 48, 0.5);
+}
+
+/* YouTube specifikus stílusok */
+.youtube-logo {
+    font-size: 24px;
+    color: #ff0000;
+    margin-bottom: 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#youtube-screen .station-info {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#youtube-screen .station-name {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+#youtube-screen .player-controls {
+    margin-top: 10px;
+}
+
+/* Javított vissza gombok */
+#youtube-screen .back-btn {
+    background-color: rgba(255, 59, 48, 0.2);
+    border-color: rgba(255, 59, 48, 0.4);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+#radio-screen .back-btn {
+    margin-top: 15px;
+}
+
+/* Kompakt vezérlőgombok - jobban látható változat */
+.compact-controls {
+    margin: 5px 0;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 120, 255, 0.2);
+    position: relative;
+    z-index: 100;
+}
+
+.compact-controls .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.3) 0%, rgba(0, 60, 120, 0.25) 100%);
+    border: 1px solid rgba(0, 120, 255, 0.4);
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.compact-controls .control-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.4) 0%, rgba(0, 60, 120, 0.35) 100%);
+    transform: scale(1.05);
+}
+
+/* Különböző színek az akciókhoz */
+.control-btn[data-action="play"] {
+    background: linear-gradient(135deg, rgba(0, 200, 83, 0.3) 0%, rgba(0, 150, 60, 0.25) 100%);
+    border-color: rgba(0, 200, 83, 0.4);
+}
+
+.control-btn[data-action="play"]:hover {
+    background: linear-gradient(135deg, rgba(0, 200, 83, 0.4) 0%, rgba(0, 150, 60, 0.35) 100%);
+}
+
+.control-btn[data-action="pause"] {
+    background: linear-gradient(135deg, rgba(255, 190, 0, 0.3) 0%, rgba(200, 150, 0, 0.25) 100%);
+    border-color: rgba(255, 190, 0, 0.4);
+}
+
+.control-btn[data-action="pause"]:hover {
+    background: linear-gradient(135deg, rgba(255, 190, 0, 0.4) 0%, rgba(200, 150, 0, 0.35) 100%);
+}
+
+.control-btn[data-action="stop"] {
+    background: linear-gradient(135deg, rgba(255, 59, 48, 0.3) 0%, rgba(200, 30, 30, 0.25) 100%);
+    border-color: rgba(255, 59, 48, 0.4);
+}
+
+.control-btn[data-action="stop"]:hover {
+    background: linear-gradient(135deg, rgba(255, 59, 48, 0.4) 0%, rgba(200, 30, 30, 0.35) 100%);
+}
+
+#youtube-screen .volume-control {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+/* YouTube specifikus fejléc */
+.youtube-header {
+    margin-bottom: 2px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Vezérlőgomb wrapper és címkék - kisebb méret */
+.control-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.control-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Rádió képernyő vezérlők átalakítása */
+#radio-screen .player-controls {
+    margin: 20px 0;
+}
+
+#radio-screen .volume-control {
+    margin: 15px 0;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 120, 255, 0.2);
+}
+
+/* Valós idejű jármű információk - elrejtve */
+#vehicle-info {
+    display: none; /* Elrejtjük a sebességmérőt */
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    background: rgba(0, 14, 36, 0.8);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 12px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 130, 255, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+#vehicle-speed {
+    font-size: 18px;
+    font-weight: 700;
+    color: #00a8ff;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#vehicle-fuel, #vehicle-engine {
+    font-size: 12px;
+    opacity: 0.95;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#vehicle-fuel {
+    color: #ffd32a;
+}
+
+#vehicle-engine {
+    color: #00c853;
+}
